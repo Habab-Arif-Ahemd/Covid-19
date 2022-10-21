@@ -1,0 +1,45 @@
+body{
+    background-color:#0F2337 ;
+}
+.Headerbar{
+background-color: black;
+color: beige;
+font-family:'Times New Roman', Times, serif;
+font-size: larger;
+font-weight: bold;
+padding: 44px;
+margin-bottom: 20px;
+}
+.box-card{
+    /* Gray/Background */
+    background: #FCFCFC;
+    border-radius: 8px;
+    margin-bottom: 1em;
+      }
+.imgWorld{
+        width: 120px;
+      }
+
+ 
+      
+
+
+
+
+      /* pagination overwrite */
+ngb-pagination ::ng-deep a {
+  color: rgb(6, 7, 7) !important;
+}
+ngb-pagination ::ng-deep .page-link{
+  padding: 6px;
+  font-size: 14px;
+}
+ngb-pagination ::ng-deep .page-item.active .page-link {
+  border-color: rgb(82, 163, 238);
+  background-color:  #124777;
+}
+h4{
+  font-weight: bold;
+  font-family:'Times New Roman', Times, serif;
+  color: #132c46;
+}
