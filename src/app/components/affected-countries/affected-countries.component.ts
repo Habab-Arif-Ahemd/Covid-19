@@ -1,40 +1,41 @@
 import { Component, PipeTransform,OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { FormControl } from '@angular/forms';
-
+import { DOCUMENT } from '@angular/common'; 
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { GetApiDataService } from 'src/app/services/get-api-data.service';
 
 interface Country {
-	name: string;
+	country: string;
 	flag: string;
-	date: number;
+	day: number;
 	population: number;
 }
-
-const COUNTRIES: Country[] = [
+/* initial values */
+ let COUNTRIES: Country[] = [
 	{
-		name: 'Russia',
+		country: 'Russia',
 		flag: 'f/f3/Flag_of_Russia.svg',
-		date: 17075200,
+		day: 17075200,
 		population: 146989754,
 	},
 	{
-		name: 'Canada',
+		country: 'Canada',
 		flag: 'c/cf/Flag_of_Canada.svg',
-		date: 9976140,
+		day: 9976140,
 		population: 36624199,
 	},
 	{
-		name: 'United States',
+		country: 'United States',
 		flag: 'a/a4/Flag_of_the_United_States.svg',
-		date: 9629091,
+		day: 9629091,
 		population: 324459463,
 	},
 	{
-		name: 'China',
+		country: 'China',
 		flag: 'f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
-		date: 9596960,
+		day: 9596960,
 		population: 1409517397,
 	},
 ];
@@ -42,8 +43,8 @@ function search(text: string, pipe: PipeTransform): Country[] {
 	return COUNTRIES.filter((country) => {
 		const term = text.toLowerCase();
 		return (
-			country.name.toLowerCase().includes(term) ||
-			pipe.transform(country.date).includes(term) ||
+			country.country.toLowerCase().includes(term) ||
+			pipe.transform(country.day).includes(term) ||
 			pipe.transform(country.population).includes(term)
 		);
 	});
@@ -56,13 +57,32 @@ function search(text: string, pipe: PipeTransform): Country[] {
 
   
 })
+
+
 export class AffectedCountriesComponent implements OnInit {
+    MonthlyHistory:[]=[]
+
+
+	
   ngOnInit(): void {
+
+	this.showHistory();
   }
-  countries$: Observable<Country[]>;
+  showHistory(){
+  this.getApiDataService.getHistory("china").subscribe((history: any) => {
+    this.MonthlyHistory=history.response
+
+	 COUNTRIES = history.response
+
+
+}); }
+	
+
+    
+    countries$: Observable<Country[]>;
 	filter = new FormControl('', { nonNullable: true });
 
-	constructor(pipe: DecimalPipe) {
+	constructor(pipe: DecimalPipe,private getApiDataService:GetApiDataService) {
 		this.countries$ = this.filter.valueChanges.pipe(
 			startWith(''),
 			map((text) => search(text, pipe)),

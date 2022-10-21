@@ -12,18 +12,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgChartsModule ,NgChartsConfiguration } from 'ng2-charts';
 import { Routes, RouterModule } from '@angular/router'; // CLI imports router
 import { CommonModule } from '@angular/common';
+import { MapComponent } from './components/map/map/map.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 const routes: Routes = []; // sets up routes constant where you define your routes
 
 @NgModule({
   declarations: [
     AppComponent,
-    AffectedCountriesComponent
+    AffectedCountriesComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule,HttpClientModule,NgSelectModule, FormsModule,NgChartsModule,ReactiveFormsModule,
+    NgbModule,HttpClientModule,NgSelectModule, FormsModule,NgChartsModule,ReactiveFormsModule,HighchartsChartModule,
     [RouterModule.forRoot(routes)]
 
   ],
