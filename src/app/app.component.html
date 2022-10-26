@@ -9,7 +9,7 @@
                          <h4> Affected Countries: </h4>
                         <!-- start -->
                            <!-- loader -->
-                          <div class="loader-card mt-3" *ngIf="isLoadingCountries"> 
+                           <div class="loader-card mt-3 container-fluid mt-5 card" *ngIf="isLoadingCountries"> 
                             <div class="content-container loader-wrapper flex-centered flex-container">
                             <div class="loading">
                               <div class="dot"></div>
@@ -59,11 +59,26 @@
 
       <!-- end -->
       <div class="col-md-8"> 
+
+        
         <h4> Charts to display statistics : </h4>
 
         <div>
           <div>
             <div style="display: block">
+                  <!-- loader -->
+            <div class="loader-card mt-3" *ngIf="isLoadingchart"> 
+              <div class="content-container loader-wrapper flex-centered flex-container">
+              <div class="loading">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+              </div>
+              </div>
+            </div>
+        <!-- end of loader -->
               <canvas baseChart
                 [data]="barChartData"
                 [options]="barChartOptions"

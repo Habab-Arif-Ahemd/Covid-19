@@ -2,8 +2,10 @@
 	<div class="mb-3 row">
 		<label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label"> Search:</label>
 		<div class="col-xs-3 col-sm-auto">
-			<input id="table-filtering-search" class="form-control" placeholder="china"   type="text" [formControl]="filter" />
-		</div>
+			<input id="table-filtering-search" class="form-control" placeholder="china" 
+						type="text" [formControl]="filter" [(ngModel)]="input"/>	</div>
+ <button class="col-xs-3 col-sm-auto" (click)="showHistory()">search</button>
+
 	</div>
 </form>
 
@@ -17,6 +19,20 @@
 		</tr>
 	</thead>
 	<tbody>
+		  <!-- loader -->
+		  <div class="loader-card mt-3 " *ngIf="isLoadingCountries"> 
+			<div class="content-container loader-wrapper flex-centered flex-container">
+			<div class="loading">
+			  <div class="dot"></div>
+			  <div class="dot"></div>
+			  <div class="dot"></div>
+			  <div class="dot"></div>
+			  <div class="dot"></div>
+			</div>
+			</div>
+		  </div>
+	  <!-- end of loader -->
+
 		<tr *ngFor="let country of countries$ | async ; index as i">
 			<th scope="row">{{ i + 1 }}</th>
 			<td>

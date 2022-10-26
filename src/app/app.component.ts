@@ -18,6 +18,8 @@ export class AppComponent {
   Statistics: [] = []
   population: [] = []
   isLoadingCountries: boolean = false;
+  isLoadingchart: boolean = false;
+
   /* for pagination */
   page = 20;
   pageSize = 8;
@@ -61,22 +63,17 @@ export class AppComponent {
       this.isLoadingCountries = false;
       this.Countries = Countries.response;
       console.log("Countries", this.Countries);
-    });
-
-    this.getApiDataService.getHistory("china").subscribe((history: any) => {
-      console.log("historyss", history.response);
-    });
-
-
-  }
+    });  }
 
 
   showStatistics() {
     let country: string[] = [];
     let cases: string[] = [];
     let population: number[] = [];
-
+    this.isLoadingchart=true;
     this.getApiDataService.getStatistics().subscribe((statistics: any) => {
+      this.isLoadingchart=false;
+
       this.Statistics = statistics.response;
       this.Statistics.slice(-7).forEach((element, index) =>
         Object.keys(element).forEach(key => {

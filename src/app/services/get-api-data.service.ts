@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
-const route: string = "https://covid-193.p.rapidapi.com/";
 
-let headers = new HttpHeaders({
-  'Content-Type': 'application/json',
-    "x-rapidapi-host": "covid-193.p.rapidapi.com",
-    "x-rapidapi-key": "5c6eae8fb8msh1550c24d68d4ca1p11877bjsnd6aba199d388"
-});
 @Injectable({
   providedIn: 'root'
 })
@@ -19,14 +14,15 @@ export class GetApiDataService {
   
   getCountries() {
     let url="countries"
-    return  this.http.get(route + url,{headers:headers});
+    return  this.http.get(environment.apiUrl + url,{headers:environment.headers});
   }
   getStatistics() {
     let url="statistics"
-    return  this.http.get(route + url,{headers:headers});
+    return  this.http.get(environment.apiUrl + url ,{headers:environment.headers});
   }
   getHistory( country: string) {
-    return  this.http.get(route +"history?country="+country ,{headers:headers});
+    let url="history?country="
+    return  this.http.get(environment.apiUrl + url + country ,{headers:environment.headers});
   }
   
 
